@@ -1,0 +1,6 @@
+{
+    "l13Diff.exclude": [
+        
+        "**/reference"
+    ]
+}
