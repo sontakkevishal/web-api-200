@@ -1,0 +1,22 @@
+{
+  "$schema": "https://flagd.dev/schema/v0/flags.json",
+
+  "flags": {
+    "software-center": {
+      "state": "ENABLED",
+      "variants": {
+        "on": true,
+        "off": false
+      },
+      "defaultVariant": "on"
+    },
+    "help-desk": {
+      "state": "ENABLED",
+      "variants": {
+        "on": true,
+        "off": false
+      },
+      "defaultVariant": "off"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/areas/" />
+  <Folder Name="/areas/bff/">
+    <File Path="bff\ui\.DS_Store" />
+    <File Path="bff\ui\frontend\.postcssrc.json" />
+    <File Path="bff\ui\frontend\scratch.txt" />
+    <Project Path="bff/BackendForFrontend/BackendForFrontend.csproj" />
+  </Folder>
+  <Folder Name="/areas/catalog/">
+    <Project Path="catalog/Catalog.Api/Catalog.Api.csproj" />
+  </Folder>
+  <Folder Name="/areas/help/" />
+  <Folder Name="/areas/shared/">
+    <Project Path="shared/ServiceDefaults/ServiceDefaults.csproj" />
+    <Project Path="shared/SoftwareCenter.OpenApi/SoftwareCenter.OpenApi.csproj" />
+    <Project Path="shared/SoftwareCenter.Security/SoftwareCenter.Security.csproj" />
+  </Folder>
+  <Folder Name="/areas/users/">
+    <Project Path="users/Users.Api/Users.Api.csproj" />
+  </Folder>
+  <Folder Name="/hosting/">
+    <Project Path="hosting/AppHost/AppHost.csproj" />
+  </Folder>
+</Solution>

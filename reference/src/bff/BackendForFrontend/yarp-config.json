@@ -1,0 +1,90 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/yarp/refs/heads/main/src/ReverseProxy/ConfigurationSchema.json",
+  "ReverseProxy": {
+    "Routes": {
+     
+      "usersApiRoute": {
+        "ClusterId": "usersApi",
+        "Match": {
+          "Path": "/api/users/{**catch-all}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/api"
+          }
+        ]
+      },
+      "userApiRoute": {
+        "AuthorizationPolicy": "Default",
+        "ClusterId": "usersApi",
+        "Match": {
+          "Path": "/api/user/{**catch-all}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/api"
+          }
+        ]
+      },
+      "featuresRoute": {
+        "ClusterId": "features",
+        "Match": {
+          "Path": "/api/features/{**catch-all}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/api/features"
+          }
+        ]
+      },
+      "catalogApiRoute": {
+        "AuthorizationPolicy": "Default",
+        "ClusterId": "catalogApi",
+        "Match": {
+          "Path": "/api/catalog/{**catch-all}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/api/catalog"
+          }
+        ]
+      },
+      "frontendRoute": {
+        "ClusterId": "frontend",
+        "Match": {
+          "Path": "{**catch-all}"
+        }
+      }
+    },
+    "Clusters": {
+      "frontend": {
+        "Destinations": {
+          "frontend1": {
+            "Address": "http://localhost:4200"
+          }
+        }
+      },
+      "usersApi": {
+        "Destinations": {
+          "usersApi1": {
+            "Address": "https://users-api"
+          }
+        }
+      },
+      "catalogApi": {
+        "Destinations": {
+          "catalogApi1": {
+            "Address": "https://catalog-api"
+          }
+        } 
+      },
+      "features": {
+        "Destinations": {
+          "features1": {
+            "Address": "http://localhost:9325"
+          }
+        }
+      }
+    }
+  }
+}
