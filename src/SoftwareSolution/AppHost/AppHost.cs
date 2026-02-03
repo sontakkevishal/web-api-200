@@ -4,6 +4,7 @@ var pg = builder.AddPostgres("pg-server")
     .WithLifetime(ContainerLifetime.Persistent);
 
 var softwareDb = pg.AddDatabase("software-db");
+// might need an initialization script, or a prepared base image, more later.
 
 
 
