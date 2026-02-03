@@ -1,4 +1,5 @@
 using Marten;
+using Software.Api.Controllers;
 
 var builder = WebApplication.CreateBuilder(args); // Hey Microsoft, give me the stuff you think I'll need.
 builder.AddNpgsqlDataSource("software-db");
@@ -12,6 +13,8 @@ builder.AddServiceDefaults(); // Add our "standard" resiliency, open telemetry, 
 //    throw new Exception("Cannnot start without a connection string");
 
 // Add services to the container.
+builder.Services.AddValidation(); // This is new. Do code gen for validation.
+builder.Services.AddProblemDetails(); // I'll talk about this in a second.
 
 builder.Services.AddMarten(config =>
 {
@@ -41,6 +44,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapCatalogRoutes();
 
 app.MapDefaultEndpoints(); // this adds the endpoints defined in the ServiceDefaults - which are mostly for health checks.
 app.Run();
