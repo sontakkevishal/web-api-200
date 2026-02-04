@@ -1,8 +1,9 @@
 using Marten;
-using Software.Api.Controllers;
+using Software.Api.BackingApis;
+using Software.Api.Catalog;
 
 var builder = WebApplication.CreateBuilder(args); // Hey Microsoft, give me the stuff you think I'll need.
-builder.AddNpgsqlDataSource("software-db");
+builder.AddNpgsqlDataSource("software-db"); // service location
 builder.AddServiceDefaults(); // Add our "standard" resiliency, open telemetry, all that.
 // ASPNETCORE_ENVIRONMENT=Tacos
 // The last place is the actual environment variables on the machine.
@@ -13,11 +14,24 @@ builder.AddServiceDefaults(); // Add our "standard" resiliency, open telemetry, 
 //    throw new Exception("Cannnot start without a connection string");
 
 // Add services to the container.
+// TypedHttpClient
+
+//var vendorApi = builder.Configuration.GetValue<string>("VENDORS_API") ?? throw new Exception("No Vendor Url");
+
+builder.Services.AddHttpClient<Vendors>(client =>
+{
+    client.BaseAddress = new Uri("https://vendors-api");
+}); // todo: throw a sample of proxy config.
+
+
 builder.Services.AddValidation(); // This is new. Do code gen for validation.
 builder.Services.AddProblemDetails(); // I'll talk about this in a second.
 
 builder.Services.AddMarten(config =>
 {
+    // add a couple of different services to the services collection
+    // one is for you, and the other is a hairy, spooky multi-threaded and thread-safe
+    // service that manages the connection, SRE, etc.
 
 }).UseNpgsqlDataSource()
 .UseLightweightSessions();

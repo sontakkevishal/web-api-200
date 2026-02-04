@@ -26,6 +26,7 @@ namespace Microsoft.Extensions.Hosting
 
             builder.Services.AddServiceDiscovery();
 
+            // this is for ALL http clients in your app.
             builder.Services.ConfigureHttpClientDefaults(http =>
             {
                 // Turn on resilience by default
@@ -70,6 +71,7 @@ namespace Microsoft.Extensions.Hosting
                         )
                         // Uncomment the following line to enable gRPC instrumentation (requires the OpenTelemetry.Instrumentation.GrpcNetClient package)
                         //.AddGrpcClientInstrumentation()
+                        .AddSource("Wolverine")
                         .AddHttpClientInstrumentation();
                 });
 
