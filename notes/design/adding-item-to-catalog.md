@@ -36,16 +36,42 @@ GET https://softwarecenter.company.com/catalog?vendor=microsoft
 
 // synchronous model - if you get a success status code here, it means the work is done.
 
+Verifying:
+- my API (SoftwareApi) called the right remote URL AS CONFIGURED
+- It used the right API AS CONFIGURED
+- I did my part!
+
+### Get a List of Vendors (Read Model)
+
+Gateway is at localhost:7292 during development.
+
 ```http
-POST https://localhost:9000/catalog
+GET https://localhost:7292/api/vendors
+```
+
+### Bad Request
+
+```http
+POST https://localhost:7292/api/software/catalog
 Content-Type: application/json
 
 {
-    "tile": "Visual Studio Code",
-    "vendor": "https://vendors.company.com/vendors/389389389"
+    "title": "Visual Studio Code",
+    "vendorId": "a3fa147d-df90-482d-ac55-eed46b96de99"
 }
 ```
 
+## Good Request
+
+```http
+POST https://localhost:7292/api/software/catalog
+Content-Type: application/json
+
+{
+    "title": "Visual Studio Code",
+    "vendorId": "b1d6f5a1-3f49-4b14-9b6b-0a1d0a1f0001"
+}
+```
 What can go wrong here:
 
 - title is bad. (require, already exists, etc.)

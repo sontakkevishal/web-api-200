@@ -1,0 +1,63 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/yarp/refs/heads/main/src/ReverseProxy/ConfigurationSchema.json",
+  "ReverseProxy": {
+    "Routes": {
+      "softwareRoute": {
+        "ClusterId": "softwareCluster",
+        "Match": {
+          "Path": "/api/software/{**catch-all}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/api/software"
+          }
+        ]
+      },
+      "vendorsRoute": {
+        "ClusterId": "vendorsCluster",
+        "Match": {
+          "Path": "/api/vendors/{**catch-all}"
+        },
+        "Transforms": [
+          {
+            "PathRemovePrefix": "/api"
+          },
+          {
+            "QueryValueParameter": "apiKey",
+            "Set": "001"
+          }
+        ]
+      },
+      "frontendDevRoute": {
+        "ClusterId": "frontend-dev",
+        "Match": {
+          "Path": "/{**catch-all}"
+        }
+       
+      }
+    },
+    "Clusters": {
+      "softwareCluster": {
+        "Destinations": {
+          "softwareDestination": {
+            "Address": "https://software-api/"
+          }
+        }
+      },
+      "vendorsCluster": {
+        "Destinations": {
+          "vendorsDestination": {
+            "Address": "https://vendors-api/"
+          }
+        }
+      },
+      "frontend-dev": {
+        "Destinations": {
+          "frontend-dev-destination": {
+            "Address": "http://localhost:4200/"
+          }
+        }
+      }
+    }
+  }
+}

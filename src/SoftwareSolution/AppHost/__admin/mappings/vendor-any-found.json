@@ -1,0 +1,22 @@
+{
+  "id": "f48b5f14-ced4-4459-910f-a18fbbc0608a",
+  "name": "Get Any Vendor - Found",
+  "request": {
+    "urlPathTemplate": "/vendors/{vendor}",
+    "method": "GET",
+    "queryParameters": {
+        "apiKey": {
+            "equalTo": "999"
+        }
+    },
+    "pathParameters": {
+      "vendor": {
+        "matches": "^(b7ecf598-dc76-4431-be29-cafa4e666629|35c3373b-1501-4019-af57-a7b7d3102533|966b1ca1-2352-4c88-9cb3-c3a14e8ced45)$"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 500
+  }
+}
